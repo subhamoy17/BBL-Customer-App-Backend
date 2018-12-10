@@ -1,0 +1,956 @@
+
+/*
+
+All error msg
+
+*/
+
+
+
+#password-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#heart_beat-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#blood_pressure-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+#ending_weight-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+
+#starting_weight-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+#height-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#trainer_id-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#slots_datepicker-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#slot_time-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#apply2-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+#apply-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+#apply1-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#right_arm-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#left_arm-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#chest-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#waist-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+#hips-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+#right_thigh-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#left_thigh-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#right_calf-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+#left_calf-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+#weight-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#mot_date-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+#video-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#email-error{
+	color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#password-confirm-error{
+	color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#designation-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+#new-password-error{
+	color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#new-password-confirm-error{
+	color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+.card {
+    margin-bottom: none;
+    border-radius: 0;
+    background-color: none; 
+    border: none; 
+}
+.wrp-1{
+    background: #fff;
+}
+
+.required_field_color{
+    color: red;
+}
+
+
+#name-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#phone-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#address-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#slots_number-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#slots_name-error{
+    
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+
+}
+
+
+#slots_price-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#slots_validity-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#contact_no-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#duration-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#image-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#description-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#title-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*for alertify jquery css*/
+
+.alertify,
+.alertify-show,
+.alertify-log {
+    -webkit-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+       -moz-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+        -ms-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+         -o-transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+            transition: all 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275); /* easeOutBack */
+}
+.alertify-hide {
+    -webkit-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+       -moz-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -ms-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+         -o-transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+            transition: all 250ms cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
+}
+.alertify-log-hide {
+    -webkit-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+       -moz-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -ms-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+         -o-transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+            transition: all 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045); /* easeInBack */
+}
+.alertify-cover {
+    position: fixed; z-index: 99999;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color:white;
+    filter:alpha(opacity=0);
+    opacity:0;
+}
+    .alertify-cover-hidden {
+        display: none;
+    }
+.alertify {
+    position: fixed; z-index: 99999;
+    top: 50px; left: 50%;
+    width: 550px;
+    margin-left: -275px;
+    opacity: 1;
+}
+    .alertify-hidden {
+        -webkit-transform: translate(0,-150px);
+           -moz-transform: translate(0,-150px);
+            -ms-transform: translate(0,-150px);
+             -o-transform: translate(0,-150px);
+                transform: translate(0,-150px);
+        opacity: 0;
+        display: none;
+    }
+    /* overwrite display: none; for everything except IE6-8 */
+    :root *> .alertify-hidden {
+        display: block;
+        visibility: hidden;
+    }
+.alertify-logs {
+    position: fixed;
+    z-index: 5000;
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+}
+.alertify-logs-hidden {
+    display: none;
+}
+    .alertify-log {
+        display: block;
+        margin-top: 10px;
+        position: relative;
+        right: -300px;
+        opacity: 0;
+    }
+    .alertify-log-show {
+        right: 0;
+        opacity: 1;
+    }
+    .alertify-log-hide {
+        -webkit-transform: translate(300px, 0);
+           -moz-transform: translate(300px, 0);
+            -ms-transform: translate(300px, 0);
+             -o-transform: translate(300px, 0);
+                transform: translate(300px, 0);
+        opacity: 0;
+    }
+    .alertify-dialog {
+        padding: 25px;
+    }
+        .alertify-resetFocus {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        .alertify-inner {
+            text-align: center;
+        }
+        .alertify-text {
+            margin-bottom: 15px;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+               -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+            font-size: 100%;
+        }
+        .alertify-buttons {
+        }
+            .alertify-button,
+            .alertify-button:hover,
+            .alertify-button:active,
+            .alertify-button:visited {
+                background: none;
+                text-decoration: none;
+                border: none;
+                /* line-height and font-size for input button */
+                line-height: 1.5;
+                font-size: 100%;
+                display: inline-block;
+                cursor: pointer;
+                margin-left: 5px;
+            }
+
+.alertify-isHidden {
+    display: none;
+}
+
+@media only screen and (max-width: 680px) {
+    .alertify,
+    .alertify-logs {
+        width: 90%;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+    }
+    .alertify {
+        left: 5%;
+        margin: 0;
+    }
+}
+
+
+/**
+ * Default Look and Feel
+ */
+.alertify,
+.alertify-log {
+    font-family: sans-serif;
+}
+.alertify {
+    background: #FFF;
+    border: 10px solid #333; /* browsers that don't support rgba */
+    border: 10px solid rgba(0,0,0,.7);
+    border-radius: 8px;
+    box-shadow: 0 3px 3px rgba(0,0,0,.3);
+    -webkit-background-clip: padding;     /* Safari 4? Chrome 6? */
+       -moz-background-clip: padding;     /* Firefox 3.6 */
+            background-clip: padding-box; /* Firefox 4, Safari 5, Opera 10, IE 9 */
+}
+    .alertify-text {
+        border: 1px solid #CCC;
+        padding: 10px;
+        border-radius: 4px;
+    }
+    .alertify-button {
+        border-radius: 4px;
+        color: #FFF;
+        font-weight: bold;
+        padding: 6px 15px;
+        text-decoration: none;
+        text-shadow: 1px 1px 0 rgba(0,0,0,.5);
+        box-shadow: inset 0 1px 0 0 rgba(255,255,255,.5);
+        background-image: -webkit-linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+        background-image:    -moz-linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+        background-image:     -ms-linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+        background-image:      -o-linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+        background-image:         linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+    }
+    .alertify-button:hover,
+    .alertify-button:focus {
+        outline: none;
+        background-image: -webkit-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
+        background-image:    -moz-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
+        background-image:     -ms-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
+        background-image:      -o-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
+        background-image:         linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
+    }
+    .alertify-button:focus {
+        box-shadow: 0 0 15px #2B72D5;
+    }
+    .alertify-button:active {
+        position: relative;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05);
+    }
+        .alertify-button-cancel,
+        .alertify-button-cancel:hover,
+        .alertify-button-cancel:focus {
+            background-color: #FE1A00;
+            border: 1px solid #D83526;
+        }
+        .alertify-button-ok,
+        .alertify-button-ok:hover,
+        .alertify-button-ok:focus {
+            background-color: #5CB811;
+            border: 1px solid #3B7808;
+        }
+
+.alertify-log {
+    background: #1F1F1F;
+    background: rgba(0,0,0,.9);
+    padding: 15px;
+    border-radius: 4px;
+    color: #FFF;
+    text-shadow: -1px -1px 0 rgba(0,0,0,.5);
+}
+    .alertify-log-error {
+        background: #FE1A00;
+        background: rgba(254,26,0,.9);
+    }
+    .alertify-log-success {
+        background: #5CB811;
+        background: rgba(92,184,17,.9);
+    }
+    
+.logo-m a img {
+    height: 70px;
+}
+
+#duplicate_category {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#video_add_error {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#duplicate_name {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+.datepicker_trainer .slots_date_trainer
+{
+    background-color: white;
+}
+
+.asd {
+    position: absolute;
+    bottom: 0px;
+    font-size: 13px;
+    left: 0;
+}
+
+
+/* 
+Created on: 12 Nov, 2018, 4:29:37 PM
+Author: totan sau
+Description: timepicker css;
+*/
+
+.ti_tx,
+.mi_tx,
+.mer_tx {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.time,
+.mins,
+.meridian {
+    width: 60px;
+    float: left;
+    margin: 0 10px;
+    font-size: 20px;
+    color: #2d2e2e;
+    font-family: arial;
+    font-weight: 700;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    padding: 18px;
+    width: 28%;
+    border: 1px solid #ccc;
+    margin: auto;
+    background: url(/backend/images/arrow.png) no-repeat;
+    border-radius: 5px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: #ccc;
+}
+
+.next {
+    background-position: 50% 150%;
+}
+
+.prev {
+    background-position: 50% -50%;
+}
+
+.time_pick {
+    position: relative;
+}
+
+.timepicker_wrap {
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 998;
+    display: none;
+    box-shadow: 2px 2px 5px 0 rgba(50,50,50,0.35);
+    background: #f6f6f6;
+    border: 1px solid #ccc;
+    float: left;
+    position: absolute;
+    top: 27px;
+    left: 0;
+}
+
+.arrow_top {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: url(/backend/images/top_arr.png) no-repeat;
+    width: 18px;
+    height: 10px;
+    z-index: 999;
+}
+input.timepicki-input {
+    background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #CCCCCC;
+        border-radius: 5px 5px 5px 5px;
+        float: none;
+        margin: 0;
+        text-align: center;
+        width: 70%;
+}
+a.reset_time {
+    float: left;
+    margin-top: 5px;
+    color: #000;
+}
+
+
+#diet_plan_name-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#author_designation-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#price-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#common_diet_image-error {
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#duplicate_dietPlanName {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#diet_plan_pdf-error {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+/*}*/
+
+/*for coupon sumit*/
+
+
+.coupon-error2 {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+.coupon-error3 {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+
+#lessthan_slot {
+    color: #dc3545;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#coupon_code-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#discount_price-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#valid_from-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#valid_to-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+.sl{
+margin-left: 20px;
+    }
+    .sl2{
+margin-left: 5px;
+    }
+
+#training_type-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+
+#payment_type-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#no_session-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#validity-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#validity_2-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#contract-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#training_type-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#notice_period-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
+#notice_period_2-error{
+    color: #dc3545;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 13px;
+}
