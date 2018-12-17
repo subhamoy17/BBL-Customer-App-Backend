@@ -36,15 +36,15 @@ Route::group (['prefix' => 'v1'], function () {
 
   // for bootcamp section //
   Route::get('pricing', 'Api\FrontController@bootcamp_details');
-  Route::post('bootcamp-onlinepayment', 'Api\CustomerController@bootcamp_onlinepayment');
+  Route::post('bootcamp-stripe-payment', 'Api\CustomerController@bootcamp_stripe_payment');
   Route::post('bootcamp-bankpayment', 'Api\CustomerController@bootcamp_bankpayment');
   Route::get('purchased-history', 'Api\CustomerController@purchased_history');
 
   Route::get('booking-bootcamp', 'Api\FrontController@booking_bootcamp');
-  Route::post('get_bootcamp_date', 'Api\FrontController@get_bootcamp_date');
   Route::post('get_bootcamp_time', 'Api\FrontController@get_bootcamp_time');
   Route::post('bootcamp-booking', 'Api\FrontController@bootcamp_booking');
   Route::post('mybooking', 'Api\FrontController@booking_history');
+  Route::post('bootcamp-booking-cancel-customer', 'Api\FrontController@bootcamp_booking_cancel_customer');
 
 });
 
