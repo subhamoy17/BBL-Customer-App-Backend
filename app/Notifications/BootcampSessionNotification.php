@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 
 
-class BootcampSessionNotification extends Notification
+class BootcampSessionNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 

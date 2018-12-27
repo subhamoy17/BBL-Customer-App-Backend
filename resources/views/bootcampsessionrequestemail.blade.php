@@ -49,16 +49,13 @@
     <!-- <th class="table-bordered">Booking Day</th> -->
     <th class="table-bordered">Booked Time</th>
   </tr>
-   @foreach($all_data as $key => $eachdata)
-   @for($i=0;$i<$eachdata->total_sessions;$i++)
-  <tr>
 
-    <th class="table-bordered">{{$eachdata->bootcamp_address[$i]}}</th>
-    <th class="table-bordered">{{date('d F Y', strtotime($eachdata->bootcamp_date[$i]))}}</th>
-    <th class="table-bordered">{{$eachdata->bootcamp_time[$i]}}</th>
+  <tr>
+    <th class="table-bordered">{{$all_data['address']}}</th>
+    <th class="table-bordered">{{date('d F Y', strtotime($all_data['date']))}}</th>
+    <th class="table-bordered">{{$all_data['time']}}</th>
   </tr>
- @endfor
-     @endforeach   
+   
 </table>
 <br>
   <a href="{{URL::to('http://192.168.1.201:5200/customer-login')}}" style="text-decoration: none;font-size: 13px;font-family: 'Open Sans', sans-serif;background: #fb5b21;padding: 18px;display: inline-block;color: #fff;border-radius: 5px;font-weight: 600; text-transform: capitalize;"><i class="fas fa-check" style="margin-right:3px;"></i> Click to check your booked session(s)</a>
