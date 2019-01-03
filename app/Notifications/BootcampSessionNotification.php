@@ -63,6 +63,38 @@ class BootcampSessionNotification extends Notification implements ShouldQueue
                 
                  ]);
         }
+
+        else if($this->notifydata['status']=='Boocked PTSession by Customer')
+        {
+         return (new MailMessage)->view(
+                  'bootcampsessionrequestemail',
+                  [
+                'enquiredTime' => Carbon::now(),
+                'customer_name'=>$this->notifydata['customer_name'],
+                'customer_email'=>$this->notifydata['customer_email'],
+                'customer_phone'=>$this->notifydata['customer_phone'],
+                'status'=>$this->notifydata['status'],
+                'url'=>$this->notifydata['url'],
+                'all_data'=>$this->notifydata['all_data'],
+                
+                 ])->subject("Personal Training Session Notification");
+        }
+
+        else if($this->notifydata['status']=='Boocked PTSession by Customer send by Trainer')
+        {
+         return (new MailMessage)->view(
+                  'ptsessionrequestemailbytrainer',
+                  [
+                'enquiredTime' => Carbon::now(),
+                'customer_name'=>$this->notifydata['customer_name'],
+                'trainer_name'=>$this->notifydata['trainer_name'],
+                
+                'status'=>$this->notifydata['status'],
+                'url'=>$this->notifydata['url'],
+                'all_data'=>$this->notifydata['all_data'],
+                
+                 ])->subject("Personal Training Session Notification");
+        }
         else
         {
             return (new MailMessage)->view(

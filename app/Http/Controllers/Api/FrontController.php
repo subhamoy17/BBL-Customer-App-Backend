@@ -335,6 +335,8 @@ class FrontController extends Controller
         ->where('plan_date',$request->bootcamp_date)
         ->whereNull('deleted_at')
         ->get()->all();
+      Log::debug ( " ::time_details:: ". print_r ($time_details, true));
+
 
       foreach($time_details as $key=>$each_time)
       {
@@ -534,102 +536,179 @@ class FrontController extends Controller
       $this->free_sessions();
 
       $now = Carbon::now()->toDateString();
-      //$time_now= Carbon::now()->toTimeString();
       $now_month = Carbon::now()->addDays(30)->toDateString();
 
-      Log::debug ( "  date ". print_r ($now, true));
+      // For Pt session 
+      $all_pt_booking=DB::table('personal_training_booking')
+        ->join('personal_training_plan_schedules','personal_training_plan_schedules.id','personal_training_booking.personal_training_plan_shedules_id')
+        ->join('slot_times','slot_times.id','personal_training_plan_schedules.plan_st_time_id')
+        ->join('bootcamp_plan_address','bootcamp_plan_address.id','personal_training_plan_schedules.address_id')
+        ->join('users','users.id','personal_training_plan_schedules.trainer_id')
+        ->select('personal_training_plan_schedules.plan_date','personal_training_plan_schedules.plan_st_time_id','personal_training_plan_schedules.plan_end_time_id','bootcamp_plan_address.address_line1','personal_training_booking.created_at','personal_training_booking.id as booking_id','personal_training_booking.cancelled_by as cancelled_by','slot_times.time as plan_st_time','users.name as trainer_name')
+        ->where('personal_training_booking.customer_id',Auth::guard('api')->user()->id);
 
+      // For Bootcamp session
       $all_booking=DB::table('bootcamp_booking')
-      ->join('bootcamp_plan_shedules','bootcamp_plan_shedules.id','bootcamp_booking.bootcamp_plan_shedules_id')
-      ->join('bootcamp_plan_address','bootcamp_plan_address.id','bootcamp_plan_shedules.address_id')
-      ->select('bootcamp_plan_shedules.plan_date','bootcamp_plan_shedules.plan_day','bootcamp_plan_shedules.plan_st_time','bootcamp_plan_shedules.plan_end_time','bootcamp_plan_address.address_line1','bootcamp_booking.created_at','bootcamp_booking.id as booking_id','bootcamp_booking.cancelled_by as cancelled_by')
-      ->where('bootcamp_booking.customer_id',Auth::guard('api')->user()->id);
+        ->join('bootcamp_plan_shedules','bootcamp_plan_shedules.id','bootcamp_booking.bootcamp_plan_shedules_id')
+        ->join('bootcamp_plan_address','bootcamp_plan_address.id','bootcamp_plan_shedules.address_id')
+        ->select('bootcamp_plan_shedules.plan_date','bootcamp_plan_shedules.plan_day','bootcamp_plan_shedules.plan_st_time','bootcamp_plan_shedules.plan_end_time','bootcamp_plan_address.address_line1','bootcamp_booking.created_at','bootcamp_booking.id as booking_id','bootcamp_booking.cancelled_by as cancelled_by')
+        ->where('bootcamp_booking.customer_id',Auth::guard('api')->user()->id);
 
-      if($request->option=='past_booking')
+      if($request->session=='bootcamp' && $request->option=='past_booking')
       {
         $all_booking=$all_booking->where('bootcamp_plan_shedules.plan_date','<',$now )
-        //->where('bootcamp_plan_shedules.plan_end_time','<',$time_now )
         ->whereNull('bootcamp_booking.deleted_at');
       }
-      elseif($request->option=='declined_booking')
+      elseif($request->session=='bootcamp' && $request->option=='declined_booking')
       {
         $all_booking=$all_booking->whereNotNull('bootcamp_booking.deleted_at')
         ->where('bootcamp_booking.cancelled_by',0);
       }
-      elseif($request->option=='cancelled_booking')
+      elseif($request->session=='bootcamp' && $request->option=='cancelled_booking')
       {
         $all_booking=$all_booking->whereNotNull('bootcamp_booking.deleted_at')
         ->where('bootcamp_booking.cancelled_by','>',0);
       }
+      elseif($request->session=='pt_session' && $request->option=='past_booking')
+      {
+        $all_pt_booking=$all_pt_booking->where('personal_training_plan_schedules.plan_date','<',$now)->whereNull('personal_training_booking.deleted_at');
+      }
+      elseif($request->session=='pt_session' && $request->option=='declined_booking')
+      {
+        $all_pt_booking=$all_pt_booking->where('personal_training_booking.cancelled_by',0)
+          ->whereNotNull('personal_training_booking.deleted_at');
+      }
+      elseif($request->session=='pt_session' && $request->option=='cancelled_booking')
+      {
+        $all_pt_booking=$all_pt_booking->whereNotNull('personal_training_booking.deleted_at')
+          ->where('personal_training_booking.cancelled_by','>',0)
+          ->whereNotNull('personal_training_booking.deleted_at');
+      }
+      elseif($request->session=='pt_session' && $request->option=='future_booking')
+      {
+        $all_pt_booking=$all_pt_booking->where('personal_training_plan_schedules.plan_date','>=',$now)->whereNull('personal_training_booking.deleted_at');
+      }
       else
       {
-        $all_booking=$all_booking->whereNull('bootcamp_booking.deleted_at')
-        ->where('bootcamp_plan_shedules.plan_date','>=',$now);
-        //->where('bootcamp_plan_shedules.plan_end_time','>',$time_now );
+        $all_booking=$all_booking->whereNull('bootcamp_booking.deleted_at')->where('bootcamp_plan_shedules.plan_date','>=',$now);
       }
 
-      $all_booking=$all_booking->orderby('bootcamp_booking.id','DESC')
-      ->get()->all();
-
-      date_default_timezone_set('Asia/Kolkata');
-      $current_time = date("Y-m-d H:i:s");
-
-      foreach($all_booking as $each_booking)
+      if($request->session=='pt_session')
       {
-        $each_booking->plan_st_time=date('h:i A',strtotime($each_booking->plan_st_time));
-        $each_booking->plan_end_time=date('h:i A',strtotime($each_booking->plan_end_time));
+        $all_pt_booking=$all_pt_booking->orderby('personal_training_booking.id','DESC')
+          ->get()->all();
+        $all_booking=[];
 
+        //date_default_timezone_set('Asia/Kolkata');
+        $current_time = date("Y-m-d H:i:s");
 
-        $bootcamp_cancel_time=$each_booking->plan_date.' '.$each_booking->plan_st_time;
-        $bootcamp_cancel_time = date("Y-m-d H:i:s", strtotime('-24 hours', strtotime($bootcamp_cancel_time)));
-
-        if($current_time<$bootcamp_cancel_time)
+        foreach($all_pt_booking as $each_customer)
         {
-          $each_booking->cancel_flg=1;
+          $start_time=DB::table('slot_times')->where('id',$each_customer->plan_st_time_id)->value('time');
+          $end_time=DB::table('slot_times')->where('id',$each_customer->plan_end_time_id)->value('time');
+
+          $each_customer->plan_st_time=date('h:i A',strtotime($start_time));
+          $each_customer->plan_end_time=date('h:i A',strtotime($end_time));
+
+          $pt_cancel_time=$each_customer->plan_date.' '.$each_customer->plan_st_time;
+          $pt_cancel_time = date("Y-m-d H:i:s", strtotime('-24 hours', strtotime($pt_cancel_time)));
+
+          if($current_time<$pt_cancel_time)
+          {
+            $each_customer->cancel_flg=1;
+          }
+          else
+          {
+            $each_customer->cancel_flg=0;
+          }
         }
-        else
+      }
+      else
+      {
+        $all_booking=$all_booking->orderby('bootcamp_booking.id','DESC')
+          ->get()->all();
+        $all_pt_booking=[];
+
+        //date_default_timezone_set('Asia/Kolkata');
+        $current_time = date("Y-m-d H:i:s");
+
+        foreach($all_booking as $each_booking)
         {
-          $each_booking->cancel_flg=0;
+          $each_booking->plan_st_time=date('h:i A',strtotime($each_booking->plan_st_time));
+          $each_booking->plan_end_time=date('h:i A',strtotime($each_booking->plan_end_time));
+
+          $bootcamp_cancel_time=$each_booking->plan_date.' '.$each_booking->plan_st_time;
+          $bootcamp_cancel_time = date("Y-m-d H:i:s", strtotime('-24 hours', strtotime($bootcamp_cancel_time)));
+
+          if($current_time<$bootcamp_cancel_time)
+          {
+            $each_booking->cancel_flg=1;
+          }
+          else
+          {
+            $each_booking->cancel_flg=0;
+          }
         }
 
       }
-
-      Log::debug ( " all_booking ". print_r ($all_booking, true)); 
 
       $no_of_session_unlimited=DB::table('order_details')
-      ->join('products','products.id','order_details.product_id')
-      ->join('training_type','training_type.id','products.training_type_id')
-      ->where('order_details.customer_id',Auth::guard('api')->user()->id)
-      ->where('order_details.status',1)
-      ->where('training_type.id',2)
-      ->where('order_details.order_validity_date','>=',$now)
-      ->where('order_details.remaining_sessions','Unlimited')
-      ->get()->all();
-
-      if(count($no_of_session_unlimited)>0)
-      {
-        $no_of_sessions='Unlimited';
-      }
-      else
-      {
-        $no_of_sessions=0;
-        $no_of_session_notunlimited=DB::table('order_details')
         ->join('products','products.id','order_details.product_id')
         ->join('training_type','training_type.id','products.training_type_id')
         ->where('order_details.customer_id',Auth::guard('api')->user()->id)
         ->where('order_details.status',1)
         ->where('training_type.id',2)
         ->where('order_details.order_validity_date','>=',$now)
-        ->where('order_details.remaining_sessions','!=','Unlimited')
+        ->where('order_details.remaining_sessions','Unlimited')
         ->get()->all();
+
+      if(count($no_of_session_unlimited)>0)
+      {
+        $no_of_sessions_bc='Unlimited';
+      }
+      else
+      {
+        $no_of_sessions_bc=0;
+        $no_of_session_notunlimited=DB::table('order_details')
+          ->join('products','products.id','order_details.product_id')
+          ->join('training_type','training_type.id','products.training_type_id')
+          ->where('order_details.customer_id',Auth::guard('api')->user()->id)
+          ->where('order_details.status',1)
+          ->where('training_type.id',2)
+          ->where('order_details.order_validity_date','>=',$now)
+          ->where('order_details.remaining_sessions','!=','Unlimited')
+          ->get()->all();
 
         foreach($no_of_session_notunlimited as $total)
         {
-          $no_of_sessions=$no_of_sessions+$total->remaining_sessions;
+          $no_of_sessions_bc=$no_of_sessions_bc+$total->remaining_sessions;
         }
       }
 
-      $total_future_booking=DB::table('bootcamp_booking')
+      $no_of_session_pt=DB::table('order_details')
+        ->join('products','products.id','order_details.product_id')
+        ->join('training_type','training_type.id','products.training_type_id')
+        ->where('order_details.customer_id',Auth::guard('api')->user()->id)
+        ->where('order_details.status',1)
+        ->where('training_type.id',1)
+        ->where('order_details.order_validity_date','>=',$now)
+        ->where('order_details.remaining_sessions','>',0)
+        ->get()->all();
+
+      $total_sessions_pt=0;
+      if(count($no_of_session_pt)>0)
+      {
+        foreach($no_of_session_pt as $total)
+        {
+          $total_sessions_pt=$total_sessions_pt+$total->remaining_sessions;
+        }
+      }
+      else
+      {
+        $total_sessions_pt=0;
+      }
+
+      $total_future_booking_bc=DB::table('bootcamp_booking')
       ->join('bootcamp_plan_shedules','bootcamp_plan_shedules.id','bootcamp_booking.bootcamp_plan_shedules_id')
       ->join('bootcamp_plan_address','bootcamp_plan_address.id','bootcamp_plan_shedules.address_id')
       ->select('bootcamp_plan_shedules.plan_date','bootcamp_plan_shedules.plan_day','bootcamp_plan_shedules.plan_st_time','bootcamp_plan_shedules.plan_end_time','bootcamp_plan_address.address_line1','bootcamp_booking.created_at')
@@ -638,7 +717,7 @@ class FrontController extends Controller
       ->where('bootcamp_plan_shedules.plan_date','>=',$now)
       ->count();
 
-      $total_declined_booking=DB::table('bootcamp_booking')
+      $total_declined_booking_bc=DB::table('bootcamp_booking')
       ->join('bootcamp_plan_shedules','bootcamp_plan_shedules.id','bootcamp_booking.bootcamp_plan_shedules_id')
       ->join('bootcamp_plan_address','bootcamp_plan_address.id','bootcamp_plan_shedules.address_id')
       ->select('bootcamp_plan_shedules.plan_date','bootcamp_plan_shedules.plan_day','bootcamp_plan_shedules.plan_st_time','bootcamp_plan_shedules.plan_end_time','bootcamp_plan_address.address_line1','bootcamp_booking.created_at')
@@ -647,7 +726,7 @@ class FrontController extends Controller
       ->where('bootcamp_booking.cancelled_by',0)
       ->count();
 
-      $total_cancelled_booking=DB::table('bootcamp_booking')
+      $total_cancelled_booking_bc=DB::table('bootcamp_booking')
       ->join('bootcamp_plan_shedules','bootcamp_plan_shedules.id','bootcamp_booking.bootcamp_plan_shedules_id')
       ->join('bootcamp_plan_address','bootcamp_plan_address.id','bootcamp_plan_shedules.address_id')
       ->select('bootcamp_plan_shedules.plan_date','bootcamp_plan_shedules.plan_day','bootcamp_plan_shedules.plan_st_time','bootcamp_plan_shedules.plan_end_time','bootcamp_plan_address.address_line1','bootcamp_booking.created_at')
@@ -656,7 +735,7 @@ class FrontController extends Controller
       ->where('bootcamp_booking.cancelled_by','>',0)
       ->count();
 
-      $total_past_booking=DB::table('bootcamp_booking')
+      $total_past_booking_bc=DB::table('bootcamp_booking')
       ->join('bootcamp_plan_shedules','bootcamp_plan_shedules.id','bootcamp_booking.bootcamp_plan_shedules_id')
       ->join('bootcamp_plan_address','bootcamp_plan_address.id','bootcamp_plan_shedules.address_id')
       ->select('bootcamp_plan_shedules.plan_date','bootcamp_plan_shedules.plan_day','bootcamp_plan_shedules.plan_st_time','bootcamp_plan_shedules.plan_end_time','bootcamp_plan_address.address_line1','bootcamp_booking.created_at')
@@ -665,8 +744,38 @@ class FrontController extends Controller
       ->where('bootcamp_plan_shedules.plan_date','<',$now)
       ->count();
 
-      $status=true;
-      return response(compact('all_booking','no_of_sessions','total_future_booking','total_declined_booking','total_cancelled_booking','total_past_booking','status'), 200);
+      $total_future_booking_pt=DB::table('personal_training_booking')
+        ->join('personal_training_plan_schedules','personal_training_plan_schedules.id','personal_training_booking.personal_training_plan_shedules_id')
+        ->join('bootcamp_plan_address','bootcamp_plan_address.id','personal_training_plan_schedules.address_id')
+        ->select('personal_training_plan_schedules.plan_date','personal_training_plan_schedules.plan_day','personal_training_plan_schedules.plan_st_time_id','personal_training_plan_schedules.plan_end_time_id','bootcamp_plan_address.address_line1','personal_training_booking.created_at')
+        ->where('personal_training_booking.customer_id',Auth::guard('api')->user()->id)
+        ->whereNull('personal_training_booking.deleted_at')->where('personal_training_plan_schedules.plan_date','>=',$now)->count();
+
+      $total_declined_booking_pt=DB::table('personal_training_booking')
+        ->join('personal_training_plan_schedules','personal_training_plan_schedules.id','personal_training_booking.personal_training_plan_shedules_id')
+        ->join('bootcamp_plan_address','bootcamp_plan_address.id','personal_training_plan_schedules.address_id')
+        ->select('personal_training_plan_schedules.plan_date','personal_training_plan_schedules.plan_day','personal_training_plan_schedules.plan_st_time_id','personal_training_plan_schedules.plan_end_time_id','bootcamp_plan_address.address_line1','personal_training_booking.created_at')
+        ->where('personal_training_booking.customer_id',Auth::guard('api')->user()->id)
+        ->whereNotNull('personal_training_booking.deleted_at')->where('personal_training_booking.cancelled_by',2)
+        ->count();
+
+      $total_cancelled_booking_pt=DB::table('personal_training_booking')
+        ->join('personal_training_plan_schedules','personal_training_plan_schedules.id','personal_training_booking.personal_training_plan_shedules_id')
+        ->join('bootcamp_plan_address','bootcamp_plan_address.id','personal_training_plan_schedules.address_id')
+        ->select('personal_training_plan_schedules.plan_date','personal_training_plan_schedules.plan_day','personal_training_plan_schedules.plan_st_time_id','personal_training_plan_schedules.plan_end_time_id','bootcamp_plan_address.address_line1','personal_training_booking.created_at')
+        ->where('personal_training_booking.customer_id',Auth::guard('api')->user()->id)
+        ->whereNotNull('personal_training_booking.deleted_at')->where('personal_training_booking.cancelled_by',1)
+        ->count();
+
+      $total_past_booking_pt=DB::table('personal_training_booking')
+        ->join('personal_training_plan_schedules','personal_training_plan_schedules.id','personal_training_booking.personal_training_plan_shedules_id')
+        ->join('bootcamp_plan_address','bootcamp_plan_address.id','personal_training_plan_schedules.address_id')
+        ->select('personal_training_plan_schedules.plan_date','personal_training_plan_schedules.plan_day','personal_training_plan_schedules.plan_st_time_id','personal_training_plan_schedules.plan_end_time_id','bootcamp_plan_address.address_line1','personal_training_booking.created_at')
+        ->where('personal_training_booking.customer_id',Auth::guard('api')->user()->id)
+        ->whereNull('personal_training_booking.deleted_at')->where('personal_training_plan_schedules.plan_date','<',$now)
+        ->count();
+
+      return response()->json(["bootcamp" => compact('no_of_sessions_bc','total_future_booking_bc','total_declined_booking_bc','total_cancelled_booking_bc','total_past_booking_bc'), "all_booking" => $all_booking, "pt_session" =>compact('total_sessions_pt','total_past_booking_pt','total_cancelled_booking_pt','total_declined_booking_pt','total_future_booking_pt'), "all_pt_booking" => $all_pt_booking, "status" => true],200);
 
     }
     catch(\Exception $e)

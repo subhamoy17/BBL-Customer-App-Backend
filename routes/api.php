@@ -65,9 +65,18 @@ Route::group (['prefix' => 'v1'], function () {
   //// For Personal Training ////
   Route::post('pt-stripe-payment','Api\PersonalTrainingController@pt_stripe_payment');
   Route::post('pt-bank-payment','Api\PersonalTrainingController@pt_bank_payment');
-  
 
+  // Book by trainer
+  Route::get('booking-personal-training','Api\PersonalTrainingController@booking_personal_training');
+  Route::post('booking_pt_date','Api\PersonalTrainingController@booking_pt_date');
+  Route::post('booking_pt_time','Api\PersonalTrainingController@booking_pt_time');
+  Route::post('personal-training-booking','Api\PersonalTrainingController@personal_training_booking');
 
+  // Book by time
+  Route::get('booking-pt-by-date','Api\PersonalTrainingController@booking_pt_by_date');
+  Route::post('get_pt_time_using_date','Api\PersonalTrainingController@get_pt_time_using_date');
+  Route::post('get_pt_trainer_using_time','Api\PersonalTrainingController@get_pt_trainer_using_time');
+  Route::post('pt-booking-by-date','Api\PersonalTrainingController@pt_booking_by_date');
 
 });
 
